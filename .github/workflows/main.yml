@@ -24,14 +24,13 @@ jobs:
           echo "files changed" 
           echo "::set-output name=files_changed::true"
         fi
-
     # 使用条件步骤：如果有文件变化则继续执行部署
     - name: Deploy files to server
       if: steps.check_changes.outputs.files_changed == 'true'
-      uses: appleboy/scp-action@master
+      uses: appleboy/scp-action@v0.1.0
       with:
-        host: ${{ secrets.SERVER_HOST }}   # 在 GitHub Secrets 中配置服务器信息
+        host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        source: "Bin/Debug/net8.0/*"        # 上传 net8.0 文件夹的内容
-        target: "/www/wwwroot/Saber/Server"  # 服务器上的目标路径
+        password: ${{ secrets.SERVER_PASSWORD }}  # 使用密码登录
+        source: "Bin/Debug/net8.0/*"  # 要上传的文件
+        target: "/www/wwwroot/Saber/Server"  # 目标路径
