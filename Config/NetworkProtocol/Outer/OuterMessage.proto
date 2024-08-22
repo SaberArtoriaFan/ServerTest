@@ -1,0 +1,34 @@
+syntax = "proto3";
+package Fantasy.Network.Message;
+message C2G_TestMessage // IMessage
+{
+	string Tag = 1;
+}
+message C2G_TestRequest // IRequest,G2C_TestResponse
+{
+	string Tag = 1;
+}
+message G2C_TestResponse // IResponse
+{
+	string Tag = 1;
+}
+message C2G_CreateAddressableRequest // IRequest,G2C_CreateAddressableResponse
+{
+
+}
+message G2C_CreateAddressableResponse // IResponse
+{
+
+}
+message C2M_TestMessage // IAddressableRouteMessage
+{
+	string Tag = 1;
+}
+message C2M_TestRequest // IAddressableRouteRequest,M2C_TestResponse
+{
+	string Tag = 1;
+}
+message M2C_TestResponse // IAddressableRouteResponse
+{
+	string Tag = 1;
+}
