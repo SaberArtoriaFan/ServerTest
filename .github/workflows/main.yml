@@ -1,0 +1,36 @@
+name: Deploy net8.0 Files to Server
+
+# 触发条件：在 push 事件时触发
+on: 
+  push:
+    branches:
+      - main # 可以根据你的分支调整
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check for changes in Bin\Debug\net8.0
+      id: check_changes
+      run: |
+        if git diff --exit-code --quiet HEAD^ HEAD -- Bin/Debug/net8.0; then
+          echo "no changes" 
+          echo "::set-output name=files_changed::false"
+        else
+          echo "files changed" 
+          echo "::set-output name=files_changed::true"
+        fi
+    # 使用条件步骤：如果有文件变化则继续执行部署
+    - name: Deploy files to server
+      if: steps.check_changes.outputs.files_changed == 'true'
+      uses: appleboy/scp-action@v0.1.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}  # 使用密码登录
+        source: "Bin/Debug/net8.0/*"  # 要上传的文件
+        target: "/www/wwwroot/Saber/Server"  # 目标路径
