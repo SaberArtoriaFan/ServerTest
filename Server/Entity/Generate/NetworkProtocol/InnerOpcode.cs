@@ -9,5 +9,6 @@ namespace Fantasy
 		 public const int M2G_CreateNetworkObjectId = 210001001;
 		 public const int G2M_RemoveClient = 210001002;
 		 public const int M2G_SyncTransform = 210001003;
+		 public const int M2G_DeleteNetworkObj = 210001004;
 	}
 }

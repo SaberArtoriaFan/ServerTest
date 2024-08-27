@@ -17,5 +17,7 @@ namespace Fantasy
 		 public const int G2C_CreateNetworkObjectId = 100000002;
 		 public const int C2M_SyncTransform = 190000002;
 		 public const int G2C_SyncTransform = 100000003;
+		 public const int G2C_DeleteNetworkObj = 100000004;
+		 public const int C2M_DeleteNetworkObj = 190000003;
 	}
 }

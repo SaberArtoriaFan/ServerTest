@@ -61,5 +61,9 @@ namespace Fantasy
             }
             
         }
+        private void OnDestroy()
+        {
+            NetWorkManager.Instance?.Session?.Send(new C2M_DeleteNetworkObj() { NetworkObjectID= this.identity });
+        }
     }
 }

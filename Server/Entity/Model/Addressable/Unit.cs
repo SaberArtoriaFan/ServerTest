@@ -13,6 +13,11 @@ public sealed class Unit : Entity
         GameEntities.Add(ge.Id, ge);
         //return ge.Id;
     }
+    public void RemoveGameEntity(GameEntity ge)
+    {
+        GameEntities.Remove(ge.Id);
+
+    }
     public GameEntity[] GetAllGameEntites()
     {
         return GameEntities.Values.ToArray();

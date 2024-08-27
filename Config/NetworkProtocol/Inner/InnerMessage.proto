@@ -32,3 +32,8 @@ message M2G_SyncTransform // IRouteMessage
 	int64 NetworkObjectID = 2;
 	TransformData Transform = 3;
 }
+message M2G_DeleteNetworkObj // IRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	int64 ClientID = 2;
+}

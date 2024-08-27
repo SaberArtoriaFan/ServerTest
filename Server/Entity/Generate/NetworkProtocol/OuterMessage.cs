@@ -246,6 +246,7 @@ namespace Fantasy
 		{
 			position = default;
 			quaternion = default;
+			scale = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<TransformData>(this);
 #endif
@@ -254,6 +255,8 @@ namespace Fantasy
 		public V3 position { get; set; }
 		[Key(1)]
 		public V4 quaternion { get; set; }
+		[Key(2)]
+		public V3 scale { get; set; }
 	}
 	[MessagePackObject]
 	public partial class InitData : AMessage
@@ -416,5 +419,42 @@ namespace Fantasy
 		public long NetworkObjectID { get; set; }
 		[Key(1)]
 		public TransformData Transform { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_DeleteNetworkObj : AMessage, IMessage
+	{
+		public static G2C_DeleteNetworkObj Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_DeleteNetworkObj>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_DeleteNetworkObj>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_DeleteNetworkObj; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class C2M_DeleteNetworkObj : AMessage, IAddressableRouteMessage
+	{
+		public static C2M_DeleteNetworkObj Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2M_DeleteNetworkObj>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_DeleteNetworkObj>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2M_DeleteNetworkObj; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
 	}
 }

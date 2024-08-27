@@ -160,4 +160,26 @@ namespace Fantasy
 		[Key(2)]
 		public TransformData Transform { get; set; }
 	}
+	[MessagePackObject]
+	public partial class M2G_DeleteNetworkObj : AMessage, IRouteMessage
+	{
+		public static M2G_DeleteNetworkObj Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_DeleteNetworkObj>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_DeleteNetworkObj>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_DeleteNetworkObj; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public long ClientID { get; set; }
+	}
 }

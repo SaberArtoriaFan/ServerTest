@@ -53,6 +53,7 @@ message TransformData
 {
 	V3 position = 1;
 	V4 quaternion = 2;
+	V3 scale = 3;
 }
 message InitData
 {
@@ -93,4 +94,12 @@ message G2C_SyncTransform // IMessage
 {
 	int64 NetworkObjectID = 1;
 	TransformData Transform = 2;
+}
+message G2C_DeleteNetworkObj // IMessage
+{
+	int64 NetworkObjectID = 1;
+}
+message C2M_DeleteNetworkObj // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
 }

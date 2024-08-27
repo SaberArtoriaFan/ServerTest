@@ -11,6 +11,9 @@ public class LogicMgr : Entity
 {
     List<Unit> units = new List<Unit>();
 
+    public Unit GetUnit(long id) => units.Find((u) => u.Id == id);
+    public Unit GetUnitByClientId(long clientId) => units.Find((u) => u.ClientID == clientId);
+
     public void AddUnit(Unit unit)
     {
         if (units.Contains(unit) == false) units.Add(unit);
