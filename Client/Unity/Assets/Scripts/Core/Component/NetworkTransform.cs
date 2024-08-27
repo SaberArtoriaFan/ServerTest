@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fantasy
 {
@@ -88,15 +83,19 @@ namespace Fantasy
             rotation = transform.rotation;
             localScale = transform.localScale;
             fixedTime = Time.time + fixedSendTime;
-            NetWorkManager.Instance.Session.Send(new C2M_SyncTransform()
+            var message = new C2M_SyncTransform()
             {
                 NetworkObjectID = netObj.Identity,
                 Transform = new TransformData()
-                {
-                    position = this.position.ToMessage(),
-                    quaternion = this.rotation.ToMessage()
-                }
-            });
+            };
+            if (syncPosition)
+                message.Transform.position = this.position.ToMessage();
+            if (syncRotation)
+                message.Transform.quaternion = this.rotation.ToMessage();
+            if(syncScale)
+                message.Transform.scale = this.localScale.ToMessage();
+
+            NetWorkManager.Instance.Session.Send(message);
             Debug.Log("请求同步位置");
         }
 
@@ -183,10 +182,18 @@ namespace Fantasy
         protected void SetNetworkSyncState(TransformData opt)
         {
             currControlTime = controlTime;
-            netPosition = opt.position.ToUnity();
-            netRotation = opt.quaternion.ToUnity() ;
-            //netLocalScale = opt.direction;
-            netLocalScale = transform.localScale;
+            if (syncPosition)
+                netPosition = opt.position.ToUnity();
+            else
+                netPosition = transform.localPosition;
+            if(syncRotation)
+                netRotation = opt.quaternion.ToUnity() ;
+            else
+                netRotation = transform.localRotation;
+            if(syncScale)
+                netLocalScale = opt.scale.ToUnity();
+            else
+                netLocalScale = transform.localScale;
         }
     }
 
