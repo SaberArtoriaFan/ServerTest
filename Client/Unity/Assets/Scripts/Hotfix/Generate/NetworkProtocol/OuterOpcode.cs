@@ -10,5 +10,12 @@ namespace Fantasy
 		 public const int C2M_TestMessage = 190000001;
 		 public const int C2M_TestRequest = 200000001;
 		 public const int M2C_TestResponse = 250000001;
+		 public const int C2M_RequestInit = 200000002;
+		 public const int M2C_ResponseInit = 250000002;
+		 public const int C2M_RequestNetworkObjectId = 200000003;
+		 public const int M2C_ResponseNetworkObjectId = 250000003;
+		 public const int G2C_CreateNetworkObjectId = 100000002;
+		 public const int C2M_SyncTransform = 190000002;
+		 public const int G2C_SyncTransform = 100000003;
 	}
 }

@@ -32,3 +32,65 @@ message M2C_TestResponse // IAddressableRouteResponse
 {
 	string Tag = 1;
 }
+message C2M_RequestInit // IAddressableRouteRequest,M2C_ResponseInit
+{
+
+}
+message V3
+{
+	float x = 1;
+	float y = 2;
+	float z = 3;
+}
+message V4
+{
+	float x = 1;
+	float y = 2;
+	float z = 3;
+	float w = 4;
+}
+message TransformData
+{
+	V3 position = 1;
+	V4 quaternion = 2;
+}
+message InitData
+{
+	int64 NetworkObjectID = 1;
+	int64 PrefabID = 2;//预制体的ID
+	repeated int64 NetworkScriptsID = 3;//预制体身上的脚本ID
+	TransformData Transform = 4;
+}
+message M2C_ResponseInit // IAddressableRouteResponse
+{
+	repeated InitData initData = 1;
+}
+
+message C2M_RequestNetworkObjectId // IAddressableRouteRequest,M2C_ResponseNetworkObjectId
+{
+	int64 PrefabID = 1;//预制体的ID
+	repeated int64 NetworkScriptsID = 2;//预制体身上的脚本ID
+	TransformData Transform = 3;
+}
+message M2C_ResponseNetworkObjectId // IAddressableRouteResponse
+{
+	int64 AddressableId = 1;	// Map服务器返回的ObjectID,返回给客户端
+	bool Authority = 2;//true时为创造者
+}
+
+message G2C_CreateNetworkObjectId // IMessage
+{
+	InitData data = 1;
+	bool Authority = 2;//true时为创造者
+}
+
+message C2M_SyncTransform // IAddressableRouteMessage
+{
+	int64 NetworkObjectID = 1;
+	TransformData Transform = 2;
+}
+message G2C_SyncTransform // IMessage
+{
+	int64 NetworkObjectID = 1;
+	TransformData Transform = 2;
+}

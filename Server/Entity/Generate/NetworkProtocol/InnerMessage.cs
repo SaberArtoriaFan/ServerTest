@@ -58,6 +58,7 @@ namespace Fantasy
 		}
 		public override void Dispose()
 		{
+			ClientID = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
@@ -66,6 +67,8 @@ namespace Fantasy
 		public M2G_ResponseAddressableId ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
 		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long ClientID { get; set; }
 	}
 	[MessagePackObject]
 	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse
@@ -87,5 +90,74 @@ namespace Fantasy
 		public long AddressableId { get; set; }
 		[Key(1)]
 		public uint ErrorCode { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_CreateNetworkObjectId : AMessage, IRouteMessage
+	{
+		public static M2G_CreateNetworkObjectId Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_CreateNetworkObjectId>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+			data = default;
+			Authority = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_CreateNetworkObjectId>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_CreateNetworkObjectId; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long ClientID { get; set; }
+		[Key(1)]
+		public InitData data { get; set; }
+		[Key(2)]
+		public bool Authority { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2M_RemoveClient : AMessage, IRouteMessage
+	{
+		public static G2M_RemoveClient Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2M_RemoveClient>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2M_RemoveClient>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.G2M_RemoveClient; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_SyncTransform : AMessage, IRouteMessage
+	{
+		public static M2G_SyncTransform Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_SyncTransform>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+			NetworkObjectID = default;
+			Transform = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_SyncTransform>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_SyncTransform; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long ClientID { get; set; }
+		[Key(1)]
+		public long NetworkObjectID { get; set; }
+		[Key(2)]
+		public TransformData Transform { get; set; }
 	}
 }

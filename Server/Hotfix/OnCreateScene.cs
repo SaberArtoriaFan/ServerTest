@@ -19,10 +19,12 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             {
                 scene.AddComponent<AddressableManageComponent>(); 
                 _addressableSceneRunTimeId = scene.RunTimeId;
-                break;
+                    scene.AddComponent<LogicMgr>();
+                    break;
             }
             case SceneType.Map:
             {
+                    scene.AddComponent<LogicMgr>();
                 break;
             }
             case SceneType.Gate: 

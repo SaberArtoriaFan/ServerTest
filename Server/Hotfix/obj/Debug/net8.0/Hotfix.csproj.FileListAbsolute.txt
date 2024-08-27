@@ -2,10 +2,7 @@ I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Hotfix.deps.json
 I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Hotfix.dll
 I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Hotfix.pdb
 I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Fantasy.Net.dll
-I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Model.dll
 I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Fantasy.Net.pdb
-I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Fantasy.Net.xml
-I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Model.pdb
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\Hotfix.csproj.AssemblyReference.cache
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\Hotfix.GeneratedMSBuildEditorConfig.editorconfig
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\Hotfix.AssemblyInfoInputs.cache
@@ -17,3 +14,5 @@ I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\Hotfix.dll
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\refint\Hotfix.dll
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\Hotfix.pdb
 I:\Temp\Fantasy\examples\Server\Hotfix\obj\Debug\net8.0\ref\Hotfix.dll
+I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Entity.dll
+I:\Temp\Fantasy\examples\Server\Hotfix\bin\Debug\net8.0\Entity.pdb
