@@ -4,7 +4,7 @@ name: Deploy net8.0 Files to Server
 on: 
   push:
     branches:
-      - main # 可以根据你的分支调整
+      - PaoPaoTang # 可以根据你的分支调整
 
 jobs:
   deploy:
@@ -14,7 +14,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Check for changes in Bin\Debug\net8.0
+    - name: Check for changes in Bin\Release\net8.0
       id: check_changes
       run: |
         if git diff --exit-code --quiet HEAD^ HEAD -- Bin/Debug/net8.0; then
@@ -32,5 +32,5 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USER }}
         password: ${{ secrets.SERVER_PASSWORD }}  # 使用密码登录
-        source: "Bin/Debug/net8.0/*"  # 要上传的文件
+        source: "Bin/Release/net8.0/*"  # 要上传的文件
         target: "/www/wwwroot/Saber/Server"  # 目标路径
