@@ -14,19 +14,33 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Check for changes in Bin\Release\net8.0
-      id: check_changes
+    # 检查 Bin/Release/net8.0 是否有更改
+    - name: Check for changes in Bin/Release/net8.0
+      id: check_bin_changes
       run: |
         if git diff --exit-code --quiet HEAD^ HEAD -- Bin/Release/net8.0; then
           echo "no changes" 
-          echo "::set-output name=files_changed::false"
+          echo "::set-output name=bin_files_changed::false"
         else
           echo "files changed" 
-          echo "::set-output name=files_changed::true"
+          echo "::set-output name=bin_files_changed::true"
         fi
-    # 使用条件步骤：如果有文件变化则继续执行部署
-    - name: Deploy files to server
-      if: steps.check_changes.outputs.files_changed == 'true'
+
+    # 检查 Config/Binary 是否有更改
+    - name: Check for changes in Config/Binary
+      id: check_config_changes
+      run: |
+        if git diff --exit-code --quiet HEAD^ HEAD -- Config/Binary; then
+          echo "no changes"
+          echo "::set-output name=config_files_changed::false"
+        else
+          echo "files changed"
+          echo "::set-output name=config_files_changed::true"
+        fi
+
+    # 部署 Bin/Release/net8.0 文件夹，如果有更改
+    - name: Deploy Bin/Release/net8.0 files to server
+      if: steps.check_bin_changes.outputs.bin_files_changed == 'true'
       uses: appleboy/scp-action@v0.1.0
       with:
         host: ${{ secrets.SERVER_HOST }}
@@ -34,3 +48,14 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}  # 使用密码登录
         source: "Bin/Release/net8.0/*"  # 要上传的文件
         target: "/www/wwwroot/Saber/Server"  # 目标路径
+
+    # 部署 Config/Binary 文件夹，如果有更改
+    - name: Deploy Config/Binary files to server
+      if: steps.check_config_changes.outputs.config_files_changed == 'true'
+      uses: appleboy/scp-action@v0.1.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USER }}
+        password: ${{ secrets.SERVER_PASSWORD }}  # 使用密码登录
+        source: "Config/Binary/*"  # 要上传的文件
+        target: "/www/wwwroot/Saber/Server/Bin/Release/net8.0/Config"  # 目标路径
