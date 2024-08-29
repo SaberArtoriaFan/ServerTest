@@ -16,16 +16,21 @@ namespace Fantasy
             var unit = logicMgr.GetUnitByClientId(message.ClientID);
             if (unit != null)
             {
-                Log.Debug($"移除玩家数据:,需要被通知移除单位数量:{unit.GetAllGameEntites().Count()}");
-                logicMgr.RemoveUnit(message.ClientID);
-                var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
-                foreach (var g in unit.GetAllGameEntites())
+                var room = logicMgr.GetRoomById(unit.RoomID);
+                if(room != null)
                 {
-                    foreach (var v in logicMgr.AllClientID())
+                    Log.Debug($"移除玩家数据:,需要被通知移除单位数量:{unit.GetAllGameEntites().Count()}");
+                    logicMgr.RemoveUnit(unit);
+                    var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
+                    foreach (var g in unit.GetAllGameEntites())
                     {
-                        scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_DeleteNetworkObj() { ClientID =v, NetworkObjectID = g.networkObjectID });
+                        foreach (var v in room.AllClientID())
+                        {
+                            scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_DeleteNetworkObj() { ClientID = v, NetworkObjectID = g.networkObjectID });
+                        }
                     }
                 }
+   
                 Log.Debug($"玩家被移除:ClientID:{message.ClientID}");
             }
             await FTask.CompletedTask;

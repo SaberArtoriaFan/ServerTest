@@ -59,6 +59,7 @@ namespace Fantasy
 		public override void Dispose()
 		{
 			ClientID = default;
+			RoomId = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
@@ -69,6 +70,8 @@ namespace Fantasy
 		public long RouteTypeOpCode() { return InnerRouteType.Route; }
 		[Key(0)]
 		public long ClientID { get; set; }
+		[Key(1)]
+		public long RoomId { get; set; }
 	}
 	[MessagePackObject]
 	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse
@@ -181,5 +184,118 @@ namespace Fantasy
 		public long NetworkObjectID { get; set; }
 		[Key(1)]
 		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_SyncSprite : AMessage, IRouteMessage
+	{
+		public static M2G_SyncSprite Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_SyncSprite>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			SpriteName = default;
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_SyncSprite>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_SyncSprite; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public string SpriteName { get; set; }
+		[Key(2)]
+		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_StartGame : AMessage, IRouteMessage
+	{
+		public static M2G_StartGame Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_StartGame>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_StartGame>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_StartGame; }
+		public long RouteTypeOpCode() { return InnerRouteType.Route; }
+		[Key(0)]
+		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_Hurt : AMessage, IAddressableRouteMessage
+	{
+		public static M2G_Hurt Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_Hurt>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			Value = default;
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_Hurt>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_Hurt; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public long Value { get; set; }
+		[Key(2)]
+		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_GameOver : AMessage, IAddressableRouteMessage
+	{
+		public static M2G_GameOver Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_GameOver>();
+		}
+		public override void Dispose()
+		{
+			WinnerClientID = default;
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_GameOver>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_GameOver; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long WinnerClientID { get; set; }
+		[Key(1)]
+		public long ClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class M2G_ExitRoom : AMessage, IAddressableRouteMessage
+	{
+		public static M2G_ExitRoom Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<M2G_ExitRoom>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+			ExitClientId = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<M2G_ExitRoom>(this);
+#endif
+		}
+		public uint OpCode() { return InnerOpcode.M2G_ExitRoom; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long ClientID { get; set; }
+		[Key(1)]
+		public long ExitClientId { get; set; }
 	}
 }

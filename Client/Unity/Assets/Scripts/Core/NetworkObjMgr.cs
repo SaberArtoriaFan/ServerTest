@@ -18,10 +18,11 @@ partial class NetWorkManager
     //维护当前活跃的networkObj
     Dictionary<long,NetworkObject> networkObjDict= new Dictionary<long,NetworkObject>();
 
+    public Transform NetworkParent=null;
 
     protected void InitNetworkObj()
     {
-        long id = 1;
+        long id = 0;
         networkPrefabDict.Clear();
         foreach (var v in networkObjects)
             networkPrefabDict.Add(id++, v);
@@ -38,26 +39,34 @@ partial class NetWorkManager
     internal void CreateGameObjByServer(InitData data,bool authority=false)
     {
         var model = networkPrefabDict[data.PrefabID].gameObject;
-        model=GameObject.Instantiate(model,data.Transform.position.ToUnity(),data.Transform.quaternion.ToUnity());
+        model=GameObject.Instantiate(model, NetworkParent);
+        model.transform.localScale=data.Transform.scale.ToUnity();
+        model.transform.localPosition = data.Transform.position.ToUnity();
+        model.transform.localRotation = data.Transform.quaternion.ToUnity();
+
         var no= model.GetOrAddComponent<NetworkObject>();
-        no.InitNetwork(data.NetworkObjectID, authority);
+        no.InitNetwork(data.NetworkObjectID, authority,data.ClientID);
         no.IdentifyScript(data.NetworkScriptsID);
         HandleNewNetworkObj(no);
 
     }
-    internal async FTask<NetworkObject> CreateGameObj(long prefabID,Vector3 pos,Quaternion quaternion)
+    internal async FTask<NetworkObject> CreateGameObj(long prefabID,Vector3 pos,Quaternion quaternion,Vector3 localScale)
     {
         var scriptId = networkPrefabDict[prefabID].GetComponents<NetworkBehavior>().Select((u=>u.ScriptID)).ToList();
         var callback = (M2C_ResponseNetworkObjectId)await _session.Call(new C2M_RequestNetworkObjectId()
         {
             PrefabID = prefabID,
             NetworkScriptsID = scriptId,
-            Transform=new TransformData() { position=pos.ToMessage(),quaternion=quaternion.ToMessage()}
+            Transform=new TransformData() { position=pos.ToMessage(),quaternion=quaternion.ToMessage(),scale=localScale.ToMessage(),active=true}
             
         });
-        var model = GameObject.Instantiate(networkPrefabDict[prefabID].gameObject,pos, quaternion);
+        var model = GameObject.Instantiate(networkPrefabDict[prefabID].gameObject,NetworkParent);
+        model.transform.localPosition = pos;
+        model.transform.localRotation = quaternion;
+        model.transform.localScale = localScale;
+
         var no = model.GetOrAddComponent<NetworkObject>();
-        no.InitNetwork(callback.AddressableId,true);
+        no.InitNetwork(callback.AddressableId,true,callback.ClientID);
         HandleNewNetworkObj(no);
         no.IdentifyScript(null);
         return no;
@@ -77,14 +86,15 @@ partial class NetWorkManager
             var obj = objs[i];
             for(int j = 0; j < obj.NetworkBehaviors.Count; j++)
             {
-                obj.NetworkBehaviors[j].NetworkUpdate();
+                if (obj.gameObject.activeSelf&&obj.NetworkBehaviors[j].enabled)
+                    obj.NetworkBehaviors[j].NetworkUpdate();
             }
         }
     }
 
-    [Button]
-    async void Test()
-    {
-        await CreateGameObj(1,Vector3.zero,Quaternion.identity);
-    }
+    //[Button]
+    //async void Test()
+    //{
+    //    await CreateGameObj(1,Vector3.zero,Quaternion.identity);
+    //}
 }

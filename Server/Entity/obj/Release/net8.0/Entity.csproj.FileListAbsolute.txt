@@ -1,0 +1,16 @@
+I:\Temp\Fantasy\examples\Server\Entity\bin\Release\net8.0\Entity.deps.json
+I:\Temp\Fantasy\examples\Server\Entity\bin\Release\net8.0\Entity.dll
+I:\Temp\Fantasy\examples\Server\Entity\bin\Release\net8.0\Entity.pdb
+I:\Temp\Fantasy\examples\Server\Entity\bin\Release\net8.0\Fantasy.Net.dll
+I:\Temp\Fantasy\examples\Server\Entity\bin\Release\net8.0\Fantasy.Net.pdb
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.csproj.AssemblyReference.cache
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.GeneratedMSBuildEditorConfig.editorconfig
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.AssemblyInfoInputs.cache
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.AssemblyInfo.cs
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.csproj.CoreCompileInputs.cache
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.sourcelink.json
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.csproj.CopyComplete
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.dll
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\refint\Entity.dll
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\Entity.pdb
+I:\Temp\Fantasy\examples\Server\Entity\obj\Release\net8.0\ref\Entity.dll

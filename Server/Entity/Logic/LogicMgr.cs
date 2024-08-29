@@ -9,60 +9,50 @@ using static System.Formats.Asn1.AsnWriter;
 
 public class LogicMgr : Entity
 {
-    List<Unit> units = new List<Unit>();
 
-    public Unit GetUnit(long id) => units.Find((u) => u.Id == id);
-    public Unit GetUnitByClientId(long clientId) => units.Find((u) => u.ClientID == clientId);
+    List<Room> roomList = new List<Room>();
 
-    public void AddUnit(Unit unit)
+    public void EnterRoom(Unit unit)
     {
-        if (units.Contains(unit) == false) units.Add(unit);
-    }
-    public void RemoveUnit(long clientId)
-    {
-        var unit = units.Find(u => u.ClientID == clientId);
-        if (unit!=null)
+        var room = roomList.Find(u => u.roomId == unit.RoomID);
+        if(room == null)
         {
-            units.Remove(unit);
-            unit.Dispose();
+            room = Room.Create<Room>(this.Scene,false,false);
+            room.roomId = unit.RoomID;
+            roomList.Add(room);
         }
+        room.AddUnit(unit);
     }
-    public List<long> AllClientID()
+    public void RemoveRoom(Room room)
     {
-        return units.Select(u => u.ClientID).ToList();
+        roomList.Remove(room);
     }
-    public async FTask<long> AddGameEntity(Unit unit,long prefabId,List<long> scriptsID, TransformData transform)
+    public Room GetRoomById(long roomId) => roomList.Find(r => r.roomId == roomId);
+    public Unit GetUnitByClientId(long clientID)
     {
-        var ge = GameEntity.Create<GameEntity>(this.Scene, false, false);
-        ge.prefabID = prefabId;
-        ge.transformData = transform;
-        ge.MaskSure(scriptsID);
-        await ge.AddComponent<AddressableMessageComponent>().Register();
-        unit.AddGameEntity(ge);
-        var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
-        for (int i = units.Count-1; i >= 0; i--)
+        for(int i=0;i<roomList.Count;i++)
         {
-            if (units[i]!=unit)
+            var res = roomList[i].GetUnitByClientId(clientID);
+            if(res!=null) return res;
+        }
+        return null;
+    }
+    public void RemoveUnit(Unit unit)
+    {
+        var room = GetRoomById(unit.RoomID);
+        if(room == null) return;
+        room.RemoveUnit(unit.ClientID);
+    }
+    public void RemoveUnit(long clientID)
+    {
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            var res = roomList[i].GetUnitByClientId(clientID);
+            if (res != null)
             {
-                this.Scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_CreateNetworkObjectId()
-                {
-                    ClientID = units[i].ClientID,
-                    data = ge.ToData()
-                });
+                roomList[i].RemoveUnit(clientID);
             }
-
         }
-        //unit.Scene.GetSession()
-        return ge.Id;
-    }
-    public List<InitData> GetAllNeedInit()
-    {
-        var list=new List<InitData>();  
-        for (int i = 0; i < units.Count; i++)
-        {
-           list.AddRange(units[i].GetAllGameEntites().Select(u => u.ToData()));
-        }
-        return list;
     }
 }
 

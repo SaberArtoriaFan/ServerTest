@@ -1,0 +1,8 @@
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\Main.pdb
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\NLog.config
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\NLog.xsd
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\libmongocrypt.so
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\Fantasy.Net.pdb
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\Entity.pdb
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\Hotfix.pdb
+I:\Temp\Fantasy\examples\Bin\Release\net8.0\publish\linux-x64\Main

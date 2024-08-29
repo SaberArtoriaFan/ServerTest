@@ -9,6 +9,7 @@ public sealed class GameEntity:Entity, ISupportedMultiEntity
 {
     public long networkObjectID=>Id;
     public long prefabID;
+    public long clientID;
     List<long> scritpsIDList;
     public TransformData transformData;
     public void MaskSure(List<long> scritpsID)
@@ -23,6 +24,7 @@ public sealed class GameEntity:Entity, ISupportedMultiEntity
         data.PrefabID= prefabID;
         data.NetworkScriptsID = scritpsIDList;
         data.Transform= transformData;
+        data.ClientID = clientID;
         return data;
     }
 }

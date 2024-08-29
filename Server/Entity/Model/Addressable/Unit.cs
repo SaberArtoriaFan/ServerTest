@@ -6,7 +6,9 @@ public sealed class Unit : Entity
 
     public long ClientID;
 
+    public long RoomID=-1;
 
+    public int EntitesCount=>GameEntities.Count;
 
     public void AddGameEntity(GameEntity ge)
     {
@@ -26,5 +28,9 @@ public sealed class Unit : Entity
     {
         if(GameEntities.TryGetValue(id, out GameEntity ge)) return ge;
         return null;
+    }
+    public void Reset()
+    {
+        GameEntities.Clear();
     }
 }

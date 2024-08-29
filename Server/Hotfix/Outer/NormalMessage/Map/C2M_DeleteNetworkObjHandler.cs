@@ -16,17 +16,22 @@ namespace Fantasy
             var ge = unit.GetGameEntity(message.NetworkObjectID);
             if (ge != null)
             {
-                unit.RemoveGameEntity(ge);
-                var clients = logMgr.AllClientID();
-                foreach (var v in clients)
+                var room = logMgr.GetRoomById(unit.RoomID);
+                if (room != null)
                 {
-                    if (v == unit.ClientID) continue;
-                    unit.Scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_DeleteNetworkObj()
+                    unit.RemoveGameEntity(ge);
+                    var clients = room.AllClientID();
+                    foreach (var v in clients)
                     {
-                        ClientID = v,
-                        NetworkObjectID = message.NetworkObjectID
-                    });
+                        if (v == unit.ClientID) continue;
+                        unit.Scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_DeleteNetworkObj()
+                        {
+                            ClientID = v,
+                            NetworkObjectID = message.NetworkObjectID
+                        });
+                    }
                 }
+    
             }
        
             await FTask.CompletedTask;

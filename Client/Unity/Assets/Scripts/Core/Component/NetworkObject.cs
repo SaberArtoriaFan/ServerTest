@@ -11,6 +11,7 @@ namespace Fantasy
     {
         private long identity=-1;
         protected bool authority = default;
+        private long clientID = -1;
 
         public long Identity { get => identity;protected set => identity = value; }
         public bool Authority { get => authority;protected set => authority = value; }
@@ -18,7 +19,8 @@ namespace Fantasy
 
         List<NetworkBehavior> networkBehaviors = new List<NetworkBehavior>();
 
-        public bool isNetworkInit { get; protected set; } = false;
+        public bool isNetworkInit => identity != -1;
+        public long ClientID { get => clientID;private set => clientID = value; }
 
         internal void Register(NetworkBehavior networkBehavior)
         {
@@ -28,11 +30,11 @@ namespace Fantasy
         {
             networkBehaviors.Remove(networkBehavior);
         }
-        internal void InitNetwork(long id,bool authority)
+        internal void InitNetwork(long id,bool authority,long clientID)
         {
-            this.identity = id;
             this.Authority = authority;
-            isNetworkInit = true;
+            this.clientID = clientID;
+            this.identity = id;
         }
         internal void IdentifyScript(List<long> scriptsID)
         {

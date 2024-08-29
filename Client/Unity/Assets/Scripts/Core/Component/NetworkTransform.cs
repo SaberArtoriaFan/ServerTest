@@ -38,6 +38,15 @@ namespace Fantasy
             netLocalScale = localScale = transform.localScale;
         }
 
+        private void OnDisable()
+        {
+            //Debug.Log("活性" + gameObject.activeSelf);
+            if(netObj!=null&&netObj.isNetworkInit&&netObj.Authority==true)
+            {
+                //SyncTransformState();
+            }
+        }
+
         public override void NetworkUpdate()
         {
             if (netObj.Identity == -1 )
@@ -94,9 +103,9 @@ namespace Fantasy
                 message.Transform.quaternion = this.rotation.ToMessage();
             if(syncScale)
                 message.Transform.scale = this.localScale.ToMessage();
-
-            NetWorkManager.Instance.Session.Send(message);
-            Debug.Log("请求同步位置");
+            message.Transform.active = this.gameObject.activeSelf;
+            NetWorkManager.SendC2M(message);
+            //Debug.Log("请求同步位置");
         }
 
         public virtual void ForcedSynchronous()
@@ -185,15 +194,17 @@ namespace Fantasy
             if (syncPosition)
                 netPosition = opt.position.ToUnity();
             else
-                netPosition = transform.localPosition;
+                netPosition = transform.position;
             if(syncRotation)
                 netRotation = opt.quaternion.ToUnity() ;
             else
-                netRotation = transform.localRotation;
+                netRotation = transform.rotation;
             if(syncScale)
                 netLocalScale = opt.scale.ToUnity();
             else
                 netLocalScale = transform.localScale;
+            if(this.gameObject.activeSelf!=opt.active)
+                this.gameObject.SetActive(opt.active);
         }
     }
 

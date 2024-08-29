@@ -16,18 +16,23 @@ namespace Fantasy
             var sceneConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
             if (ge != null)
             {
-                ge.transformData = message.Transform;
-                var clientIds= logmgr.AllClientID();
-                foreach(var v in clientIds)
+                var room = logmgr.GetRoomById(unit.RoomID);
+                if (room != null)
                 {
-                    if (v == unit.ClientID) continue;
-                    unit.Scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_SyncTransform()
+                    ge.transformData = message.Transform;
+                    var clientIds = room.AllClientID();
+                    foreach (var v in clientIds)
                     {
-                        ClientID = v,
-                        NetworkObjectID = ge.networkObjectID,
-                        Transform = ge.transformData
-                    }) ;
+                        if (v == unit.ClientID) continue;
+                        unit.Scene.NetworkMessagingComponent.SendInnerRoute(sceneConfig.RouteId, new M2G_SyncTransform()
+                        {
+                            ClientID = v,
+                            NetworkObjectID = ge.networkObjectID,
+                            Transform = ge.transformData
+                        });
+                    }
                 }
+         
            
             }
             else

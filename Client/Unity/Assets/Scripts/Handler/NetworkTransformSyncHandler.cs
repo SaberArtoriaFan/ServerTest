@@ -20,6 +20,7 @@ namespace Saber.Net
                 {
                     netobj.transform.position = message.Transform.position.ToUnity();
                     netobj.transform.rotation = message.Transform.quaternion.ToUnity();
+                    netobj.transform.localScale = message.Transform.scale.ToUnity();
                     netobj.gameObject.AddComponent<NetworkTransform>(); 
                 }
             }

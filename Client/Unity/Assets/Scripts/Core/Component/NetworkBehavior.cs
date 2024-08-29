@@ -7,20 +7,21 @@ using UnityEngine;
 
 namespace Fantasy
 {
+    [RequireComponent(typeof(NetworkObject))]
     public abstract class NetworkBehavior:MonoBehaviour
     {
         public NetworkObject netObj { get; private set; }
         public long ScriptID{get;private set;}
         public bool isNetworkInit { get; private set; } = false;
-        private void Awake()
+        protected virtual void Awake()
         {
             netObj = GetComponent<NetworkObject>();
             this.ScriptID=this.GetType().GetHashCode();
         }
         protected virtual void Start()
         {
-            if (isNetworkInit == false && netObj.isNetworkInit == true)
-                OnNetworkObjectInit();
+            //if (isNetworkInit == false && netObj.isNetworkInit == true)
+            //    OnNetworkObjectInit();
         }
         public virtual void OnNetworkObjectInit()
         {

@@ -21,8 +21,14 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
     public event Action<ConnectResult> ConnectEvent;
     ConnectStatus connectStatus = ConnectStatus.NoStart;
 
+    public static long ClientID { get;private set; }
+    public static long RoomID { get; set; }
+    public static bool isAddress { get; set; }
+    public static long RoomSortId { get; private set; }
     private async FTask OnConnectAddressableClick()
     {
+        DontDestroyOnLoad(this.gameObject);
+        Application.runInBackground = true;
         // 1、初始化Fantasy
         _scene = await Fantasy.Entry.Initialize(GetType().Assembly);
         // 2、连接到Gate服务器
@@ -34,8 +40,12 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
             OnConnectFail,
             OnConnectDisconnect,
             false, 5000);
+
+    }
+    public async FTask InitRoom()
+    {
         // 3、发送C2G_CreateAddressableRequest协议给Gate，进行创建Addressable.
-        var response = (G2C_CreateAddressableResponse)await _session.Call(new C2G_CreateAddressableRequest());
+        var response = (G2C_CreateAddressableResponse)await _session.Call(new C2G_CreateAddressableRequest() {RoomId=RoomID });
         if (response.ErrorCode != 0)
         {
             Log.Debug("创建Addressable失败！");
@@ -43,6 +53,7 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
             return;
         }
         Log.Debug("创建Addressable成功！");
+        isAddress = true;
         InitNetwork().Coroutine();
     }
     private void OnConnectComplete()
@@ -70,7 +81,9 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
     async FTask InitNetwork()
     {
        var response= (M2C_ResponseInit) await _session.Call(new C2M_RequestInit());
-        for(int i = 0; i < response.initData.Count; i++)
+        ClientID= response.ClientID;
+        RoomSortId = response.SortID;
+        for (int i = 0; i < response.initData.Count; i++)
         {
             var data= response.initData[i];
             CreateGameObjByServer(data);
@@ -93,5 +106,11 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
             nextUpdateFrame=Time.time+frame;
             UpdateNetworkObj();
         }
+    }
+
+    public static void SendC2M(IRouteMessage routeMessage)
+    {
+        if(isAddress)
+            Instance.Session.Send(routeMessage);
     }
 }

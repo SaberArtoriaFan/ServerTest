@@ -81,6 +81,7 @@ namespace Fantasy
 		}
 		public override void Dispose()
 		{
+			RoomId = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<C2G_CreateAddressableRequest>(this);
 #endif
@@ -88,6 +89,8 @@ namespace Fantasy
 		[IgnoreMember]
 		public G2C_CreateAddressableResponse ResponseType { get; set; }
 		public uint OpCode() { return OuterOpcode.C2G_CreateAddressableRequest; }
+		[Key(0)]
+		public long RoomId { get; set; }
 	}
 	[MessagePackObject]
 	public partial class G2C_CreateAddressableResponse : AMessage, IResponse
@@ -247,6 +250,7 @@ namespace Fantasy
 			position = default;
 			quaternion = default;
 			scale = default;
+			active = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<TransformData>(this);
 #endif
@@ -257,6 +261,8 @@ namespace Fantasy
 		public V4 quaternion { get; set; }
 		[Key(2)]
 		public V3 scale { get; set; }
+		[Key(3)]
+		public bool active { get; set; }
 	}
 	[MessagePackObject]
 	public partial class InitData : AMessage
@@ -271,6 +277,7 @@ namespace Fantasy
 			PrefabID = default;
 			NetworkScriptsID.Clear();
 			Transform = default;
+			ClientID = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<InitData>(this);
 #endif
@@ -283,6 +290,8 @@ namespace Fantasy
 		public List<long> NetworkScriptsID = new List<long>();
 		[Key(3)]
 		public TransformData Transform { get; set; }
+		[Key(4)]
+		public long ClientID { get; set; }
 	}
 	[MessagePackObject]
 	public partial class M2C_ResponseInit : AMessage, IAddressableRouteResponse
@@ -295,6 +304,8 @@ namespace Fantasy
 		{
 			ErrorCode = default;
 			initData.Clear();
+			ClientID = default;
+			SortID = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<M2C_ResponseInit>(this);
 #endif
@@ -303,6 +314,10 @@ namespace Fantasy
 		[Key(0)]
 		public List<InitData> initData = new List<InitData>();
 		[Key(1)]
+		public long ClientID { get; set; }
+		[Key(2)]
+		public long SortID { get; set; }
+		[Key(3)]
 		public uint ErrorCode { get; set; }
 	}
 	[MessagePackObject]
@@ -344,6 +359,7 @@ namespace Fantasy
 			ErrorCode = default;
 			AddressableId = default;
 			Authority = default;
+			ClientID = default;
 #if FANTASY_NET || FANTASY_UNITY
 			Scene.MessagePoolComponent.Return<M2C_ResponseNetworkObjectId>(this);
 #endif
@@ -354,28 +370,9 @@ namespace Fantasy
 		[Key(1)]
 		public bool Authority { get; set; }
 		[Key(2)]
+		public long ClientID { get; set; }
+		[Key(3)]
 		public uint ErrorCode { get; set; }
-	}
-	[MessagePackObject]
-	public partial class G2C_CreateNetworkObjectId : AMessage, IMessage
-	{
-		public static G2C_CreateNetworkObjectId Create(Scene scene)
-		{
-			return scene.MessagePoolComponent.Rent<G2C_CreateNetworkObjectId>();
-		}
-		public override void Dispose()
-		{
-			data = default;
-			Authority = default;
-#if FANTASY_NET || FANTASY_UNITY
-			Scene.MessagePoolComponent.Return<G2C_CreateNetworkObjectId>(this);
-#endif
-		}
-		public uint OpCode() { return OuterOpcode.G2C_CreateNetworkObjectId; }
-		[Key(0)]
-		public InitData data { get; set; }
-		[Key(1)]
-		public bool Authority { get; set; }
 	}
 	[MessagePackObject]
 	public partial class C2M_SyncTransform : AMessage, IAddressableRouteMessage
@@ -398,6 +395,27 @@ namespace Fantasy
 		public long NetworkObjectID { get; set; }
 		[Key(1)]
 		public TransformData Transform { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_CreateNetworkObjectId : AMessage, IMessage
+	{
+		public static G2C_CreateNetworkObjectId Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_CreateNetworkObjectId>();
+		}
+		public override void Dispose()
+		{
+			data = default;
+			Authority = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_CreateNetworkObjectId>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_CreateNetworkObjectId; }
+		[Key(0)]
+		public InitData data { get; set; }
+		[Key(1)]
+		public bool Authority { get; set; }
 	}
 	[MessagePackObject]
 	public partial class G2C_SyncTransform : AMessage, IMessage
@@ -456,5 +474,214 @@ namespace Fantasy
 		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
 		[Key(0)]
 		public long NetworkObjectID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_SyncSprite : AMessage, IMessage
+	{
+		public static G2C_SyncSprite Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_SyncSprite>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			SpriteName = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_SyncSprite>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_SyncSprite; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public string SpriteName { get; set; }
+	}
+	[MessagePackObject]
+	public partial class C2M_SyncSprite : AMessage, IAddressableRouteMessage
+	{
+		public static C2M_SyncSprite Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2M_SyncSprite>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			SpriteName = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_SyncSprite>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2M_SyncSprite; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public string SpriteName { get; set; }
+	}
+	[MessagePackObject]
+	public partial class C2G_LobbyRequest : AMessage, IRequest
+	{
+		public static C2G_LobbyRequest Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2G_LobbyRequest>();
+		}
+		public override void Dispose()
+		{
+			StatusCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2G_LobbyRequest>(this);
+#endif
+		}
+		[IgnoreMember]
+		public G2C_LobbyResponse ResponseType { get; set; }
+		public uint OpCode() { return OuterOpcode.C2G_LobbyRequest; }
+		[Key(0)]
+		public long StatusCode { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_LobbyResponse : AMessage, IResponse
+	{
+		public static G2C_LobbyResponse Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_LobbyResponse>();
+		}
+		public override void Dispose()
+		{
+			ErrorCode = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_LobbyResponse>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_LobbyResponse; }
+		[Key(0)]
+		public uint ErrorCode { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_LobbyFinishMessage : AMessage, IMessage
+	{
+		public static G2C_LobbyFinishMessage Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_LobbyFinishMessage>();
+		}
+		public override void Dispose()
+		{
+			roomID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_LobbyFinishMessage>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_LobbyFinishMessage; }
+		[Key(0)]
+		public long roomID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_StartGame : AMessage, IMessage
+	{
+		public static G2C_StartGame Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_StartGame>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_StartGame>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_StartGame; }
+	}
+	[MessagePackObject]
+	public partial class G2C_Hurt : AMessage, IMessage
+	{
+		public static G2C_Hurt Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_Hurt>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			Value = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_Hurt>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_Hurt; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public long Value { get; set; }
+	}
+	[MessagePackObject]
+	public partial class C2M_Hurt : AMessage, IAddressableRouteMessage
+	{
+		public static C2M_Hurt Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2M_Hurt>();
+		}
+		public override void Dispose()
+		{
+			NetworkObjectID = default;
+			Value = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_Hurt>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2M_Hurt; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+		[Key(0)]
+		public long NetworkObjectID { get; set; }
+		[Key(1)]
+		public long Value { get; set; }
+	}
+	[MessagePackObject]
+	public partial class G2C_GameOver : AMessage, IMessage
+	{
+		public static G2C_GameOver Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_GameOver>();
+		}
+		public override void Dispose()
+		{
+			WinnerClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_GameOver>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_GameOver; }
+		[Key(0)]
+		public long WinnerClientID { get; set; }
+	}
+	[MessagePackObject]
+	public partial class C2M_ExitRoom : AMessage, IAddressableRouteMessage
+	{
+		public static C2M_ExitRoom Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<C2M_ExitRoom>();
+		}
+		public override void Dispose()
+		{
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<C2M_ExitRoom>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.C2M_ExitRoom; }
+		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
+	}
+	[MessagePackObject]
+	public partial class G2C_ExitRoom : AMessage, IMessage
+	{
+		public static G2C_ExitRoom Create(Scene scene)
+		{
+			return scene.MessagePoolComponent.Rent<G2C_ExitRoom>();
+		}
+		public override void Dispose()
+		{
+			ClientID = default;
+#if FANTASY_NET || FANTASY_UNITY
+			Scene.MessagePoolComponent.Return<G2C_ExitRoom>(this);
+#endif
+		}
+		public uint OpCode() { return OuterOpcode.G2C_ExitRoom; }
+		[Key(0)]
+		public long ClientID { get; set; }
 	}
 }
