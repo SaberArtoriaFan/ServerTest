@@ -17,7 +17,7 @@ jobs:
     - name: Check for changes in Bin\Release\net8.0
       id: check_changes
       run: |
-        if git diff --exit-code --quiet HEAD^ HEAD -- Bin/Debug/net8.0; then
+        if git diff --exit-code --quiet HEAD^ HEAD -- Bin/Release/net8.0; then
           echo "no changes" 
           echo "::set-output name=files_changed::false"
         else
