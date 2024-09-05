@@ -1,6 +1,6 @@
 syntax = "proto3";
 package Sining.Message;
-// Protocol MemoryPack
+// Protocol ProtoBuf
 message G2A_TestRequest // IRouteRequest,G2A_TestResponse
 {
 
