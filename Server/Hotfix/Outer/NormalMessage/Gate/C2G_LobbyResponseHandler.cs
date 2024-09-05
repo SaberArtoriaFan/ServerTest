@@ -1,4 +1,5 @@
 ﻿
+
 namespace Fantasy.Gate;
 
 public sealed class C2GLobbyResponseHandler : MessageRPC<C2G_LobbyRequest, G2C_LobbyResponse>

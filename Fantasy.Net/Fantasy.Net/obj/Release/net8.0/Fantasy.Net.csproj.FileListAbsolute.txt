@@ -1,0 +1,13 @@
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\bin\Release\net8.0\Fantasy.Net.deps.json
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\bin\Release\net8.0\Fantasy.Net.dll
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\bin\Release\net8.0\Fantasy.Net.pdb
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.csproj.AssemblyReference.cache
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.GeneratedMSBuildEditorConfig.editorconfig
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.AssemblyInfoInputs.cache
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.AssemblyInfo.cs
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.csproj.CoreCompileInputs.cache
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.sourcelink.json
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.dll
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\refint\Fantasy.Net.dll
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\Fantasy.Net.pdb
+I:\Fansty\FantasyNew\Fantasy.Net\Fantasy.Net\obj\Release\net8.0\ref\Fantasy.Net.dll

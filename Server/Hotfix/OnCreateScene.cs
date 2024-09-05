@@ -1,4 +1,5 @@
-﻿namespace Fantasy;
+﻿
+namespace Fantasy;
 
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
@@ -17,8 +18,6 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         {
             case SceneType.Addressable:
             {
-                scene.AddComponent<AddressableManageComponent>(); 
-                _addressableSceneRunTimeId = scene.RunTimeId;
                     scene.AddComponent<LogicMgr>();
                     break;
             }

@@ -1,5 +1,7 @@
-using MessagePack;
+using ProtoBuf;
+using MemoryPack;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization.Attributes;
 using Fantasy;
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantUsingDirective
@@ -13,7 +15,7 @@ using Fantasy;
 
 namespace Fantasy
 {	
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2A_TestRequest : AMessage, IRouteRequest
 	{
 		public static G2A_TestRequest Create(Scene scene)
@@ -26,12 +28,11 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2A_TestRequest>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public G2A_TestResponse ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2A_TestRequest; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2A_TestResponse : AMessage, IRouteResponse
 	{
 		public static G2A_TestResponse Create(Scene scene)
@@ -46,10 +47,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.G2A_TestResponse; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public uint ErrorCode { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2M_RequestAddressableId : AMessage, IRouteRequest
 	{
 		public static G2M_RequestAddressableId Create(Scene scene)
@@ -64,16 +65,15 @@ namespace Fantasy
 			Scene.MessagePoolComponent.Return<G2M_RequestAddressableId>(this);
 #endif
 		}
-		[IgnoreMember]
+		[ProtoIgnore]
 		public M2G_ResponseAddressableId ResponseType { get; set; }
 		public uint OpCode() { return InnerOpcode.G2M_RequestAddressableId; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long RoomId { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_ResponseAddressableId : AMessage, IRouteResponse
 	{
 		public static M2G_ResponseAddressableId Create(Scene scene)
@@ -89,12 +89,12 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long AddressableId { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public uint ErrorCode { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_CreateNetworkObjectId : AMessage, IRouteMessage
 	{
 		public static M2G_CreateNetworkObjectId Create(Scene scene)
@@ -111,15 +111,14 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_CreateNetworkObjectId; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public InitData data { get; set; }
-		[Key(2)]
+		[ProtoMember(3)]
 		public bool Authority { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class G2M_RemoveClient : AMessage, IRouteMessage
 	{
 		public static G2M_RemoveClient Create(Scene scene)
@@ -134,11 +133,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.G2M_RemoveClient; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_SyncTransform : AMessage, IRouteMessage
 	{
 		public static M2G_SyncTransform Create(Scene scene)
@@ -155,15 +153,14 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_SyncTransform; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long NetworkObjectID { get; set; }
-		[Key(2)]
+		[ProtoMember(3)]
 		public TransformData Transform { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_DeleteNetworkObj : AMessage, IRouteMessage
 	{
 		public static M2G_DeleteNetworkObj Create(Scene scene)
@@ -179,13 +176,12 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_DeleteNetworkObj; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long NetworkObjectID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_SyncSprite : AMessage, IRouteMessage
 	{
 		public static M2G_SyncSprite Create(Scene scene)
@@ -202,15 +198,14 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_SyncSprite; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long NetworkObjectID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public string SpriteName { get; set; }
-		[Key(2)]
+		[ProtoMember(3)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_StartGame : AMessage, IRouteMessage
 	{
 		public static M2G_StartGame Create(Scene scene)
@@ -225,11 +220,10 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_StartGame; }
-		public long RouteTypeOpCode() { return InnerRouteType.Route; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_Hurt : AMessage, IAddressableRouteMessage
 	{
 		public static M2G_Hurt Create(Scene scene)
@@ -246,15 +240,14 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_Hurt; }
-		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long NetworkObjectID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long Value { get; set; }
-		[Key(2)]
+		[ProtoMember(3)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_GameOver : AMessage, IAddressableRouteMessage
 	{
 		public static M2G_GameOver Create(Scene scene)
@@ -270,13 +263,12 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_GameOver; }
-		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long WinnerClientID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long ClientID { get; set; }
 	}
-	[MessagePackObject]
+	[ProtoContract]
 	public partial class M2G_ExitRoom : AMessage, IAddressableRouteMessage
 	{
 		public static M2G_ExitRoom Create(Scene scene)
@@ -292,10 +284,9 @@ namespace Fantasy
 #endif
 		}
 		public uint OpCode() { return InnerOpcode.M2G_ExitRoom; }
-		public long RouteTypeOpCode() { return InnerRouteType.Addressable; }
-		[Key(0)]
+		[ProtoMember(1)]
 		public long ClientID { get; set; }
-		[Key(1)]
+		[ProtoMember(2)]
 		public long ExitClientId { get; set; }
 	}
 }

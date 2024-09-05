@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "I:\\Temp\\Fantasy\\examples\\Server\\Main\\Main.csproj": {}
+    "I:\\Fansty\\FantasyNew\\examples\\Server\\Main\\Main.csproj": {}
   },
   "projects": {
-    "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj": {
+    "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj",
+        "projectUniqueName": "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj",
         "projectName": "Entity",
-        "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj",
+        "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj",
         "packagesPath": "C:\\Users\\company\\.nuget\\packages\\",
-        "outputPath": "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\obj\\",
+        "outputPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\company\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
+              "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
               }
             }
           }
@@ -43,14 +43,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.1, )",
-              "autoReferenced": true
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -76,14 +68,14 @@
         }
       }
     },
-    "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\Hotfix.csproj": {
+    "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\Hotfix.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\Hotfix.csproj",
+        "projectUniqueName": "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\Hotfix.csproj",
         "projectName": "Hotfix",
-        "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\Hotfix.csproj",
+        "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\Hotfix.csproj",
         "packagesPath": "C:\\Users\\company\\.nuget\\packages\\",
-        "outputPath": "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\obj\\",
+        "outputPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\company\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -100,11 +92,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj"
+              "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj"
               },
-              "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
+              "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
               }
             }
           }
@@ -118,14 +110,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.1, )",
-              "autoReferenced": true
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -151,14 +135,14 @@
         }
       }
     },
-    "I:\\Temp\\Fantasy\\examples\\Server\\Main\\Main.csproj": {
+    "I:\\Fansty\\FantasyNew\\examples\\Server\\Main\\Main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Temp\\Fantasy\\examples\\Server\\Main\\Main.csproj",
+        "projectUniqueName": "I:\\Fansty\\FantasyNew\\examples\\Server\\Main\\Main.csproj",
         "projectName": "Main",
-        "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Main\\Main.csproj",
+        "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Main\\Main.csproj",
         "packagesPath": "C:\\Users\\company\\.nuget\\packages\\",
-        "outputPath": "I:\\Temp\\Fantasy\\examples\\Server\\Main\\obj\\publish\\linux-x64\\",
+        "outputPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Main\\obj\\publish\\linux-x64\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\company\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -175,14 +159,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Entity\\Entity.csproj"
+              "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Entity\\Entity.csproj"
               },
-              "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\Hotfix.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\examples\\Server\\Hotfix\\Hotfix.csproj"
+              "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\Hotfix.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\examples\\Server\\Hotfix\\Hotfix.csproj"
               },
-              "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
-                "projectPath": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
+              "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
+                "projectPath": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj"
               }
             }
           }
@@ -196,14 +180,6 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.1, )",
-              "autoReferenced": true
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -235,14 +211,14 @@
         }
       }
     },
-    "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
+    "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj",
+        "projectUniqueName": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj",
         "projectName": "Fantasy.Net",
-        "projectPath": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj",
+        "projectPath": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\Fantasy.Net.csproj",
         "packagesPath": "C:\\Users\\company\\.nuget\\packages\\",
-        "outputPath": "I:\\Temp\\Fantasy\\Fantasy.Net\\Fantasy.Net\\obj\\",
+        "outputPath": "I:\\Fansty\\FantasyNew\\Fantasy.Net\\Fantasy.Net\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\company\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -275,15 +251,9 @@
               "target": "Package",
               "version": "[2.9.1, )"
             },
-            "MessagePack": {
+            "MemoryPack": {
               "target": "Package",
-              "version": "[2.5.172, )"
-            },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.1, )",
-              "autoReferenced": true
+              "version": "[1.21.1, )"
             },
             "MongoDB.Bson": {
               "target": "Package",
@@ -304,6 +274,10 @@
             "System.IO.Pipelines": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "protobuf-net": {
+              "target": "Package",
+              "version": "[3.2.30, )"
             }
           },
           "imports": [

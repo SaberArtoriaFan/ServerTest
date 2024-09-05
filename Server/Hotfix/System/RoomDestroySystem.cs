@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fantasy {
+namespace Fantasy
+{
     internal class RoomDestroySystem : DestroySystem<Room>
     {
         protected override void Destroy(Room self)
