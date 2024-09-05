@@ -25,7 +25,7 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
     public static long RoomID { get; set; }
     public static bool isAddress { get; set; }
     public static long RoomSortId { get; private set; }
-    private async FTask OnConnectAddressableClick()
+    public async FTask OnConnectAddressableClick()
     {
         DontDestroyOnLoad(this.gameObject);
         Application.runInBackground = true;
@@ -97,7 +97,6 @@ public partial class NetWorkManager : SingletonMono<NetWorkManager>
     }
     void Start()
     {
-        OnConnectAddressableClick().Coroutine();
     }
     private void FixedUpdate()
     {

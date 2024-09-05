@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.fantasy.unity": "file:../../../../Fantasy.Unity/Fantasy.Unity",
+    "com.fantasy.unity": "file:../../../Fantasy.Unity/Fantasy.Unity",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.development": "1.0.2",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
